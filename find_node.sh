@@ -7,13 +7,13 @@
 #        Searching: 37/37 nodes
 #        Action Server
 #        =============
-#        Node: /tb0/controller_server_rclcpp_node
-#            /tb0/follow_path: nav2_msgs/action/FollowPath
+#        Node: /controller_server_rclcpp_node
+#            /follow_path: nav2_msgs/action/FollowPath
 #
 #        Action Clients
 #        ==============
-#        Node: /tb0/bt_navigator_rclcpp_node
-#            /tb0/follow_path: nav2_msgs/action/FollowPath
+#        Node: /bt_navigator_rclcpp_node
+#            /follow_path: nav2_msgs/action/FollowPath
 #
 
 if [ $# -eq 0 ]; then
@@ -83,15 +83,32 @@ for node in $active_nodes; do
   ((current++))
 done
 
-echo -e "\nTopic Publishers\n================"
-echo -e "$Topics_Publisher"
-echo -e "\nTopic Subscribers\n================="
-echo -e "$Topics_Subscribers"
-echo -e "\nService Server\n=============="
-echo -e "$Service_Servers"
-echo -e "\nService Clients\n==============="
-echo -e "$Service_Clients"
-echo -e "\nAction Server\n============="
-echo -e "$Action_Servers"
-echo -e "\nAction Clients\n=============="
-echo -e "$Action_Clients"
+if [[ -n "$Topics_Publisher" ]]; then
+        echo -e "\nTopic Publishers\n================"
+        echo -e "$Topics_Publisher"
+fi
+
+if [[ -n "$Topics_Subscribers" ]]; then
+        echo -e "\nTopic Subscribers\n================="
+        echo -e "$Topics_Subscribers"
+fi
+
+if [[ -n "$Service_Servers" ]]; then
+        echo -e "\nService Server\n=============="
+        echo -e "$Service_Servers"
+fi
+
+if [[ -n "$Service_Clients" ]]; then
+        echo -e "\nService Clients\n==============="
+        echo -e "$Service_Clients"
+fi
+
+if [[ -n "$Action_Servers" ]]; then
+        echo -e "\nAction Server\n============="
+        echo -e "$Action_Servers"
+fi
+
+if [[ -n "$Action_Clients" ]]; then
+        echo -e "\nAction Clients\n=============="
+        echo -e "$Action_Clients"
+fi
