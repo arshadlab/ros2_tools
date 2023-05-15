@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Tested with ROS2 foxy
 # Usage:
 #    find_node.sh <keyword|topic|service|action>
 #    
