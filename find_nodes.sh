@@ -1,5 +1,17 @@
 #!/bin/bash
-# Tested with ROS2 foxy
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 # Usage:
 #    find_node.sh <keyword|topic|service|action>
 #    
@@ -15,6 +27,7 @@
 #        Node: /bt_navigator_rclcpp_node
 #            /follow_path: nav2_msgs/action/FollowPath
 #
+#  Author: Arshad Mehmood (arshadm78@yahoo.com)
 
 if [ $# -eq 0 ]; then
   echo "Please provide the service name as an argument."
