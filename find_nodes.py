@@ -1,4 +1,17 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 # Usage:
 #    find_nodes.py <keyword|topic|service|action>
 #    
@@ -18,11 +31,14 @@
 
 import sys
 import rclpy
+import time
+from rcl_interfaces.srv import SetParameters, GetParameters
 from rclpy.node import Node
 
+NODE_NAME='info_node'
 class InfoNode(Node):
     def __init__(self):
-        super().__init__('info_node')
+        super().__init__(NODE_NAME)
 
 
     def print_info(self, pattern):
@@ -33,6 +49,13 @@ class InfoNode(Node):
         servers = {}  # Services and Actions are combined
         clients = {}  # Services and Actions are combined
         
+        # Work around to give some time to node to populate. 
+        #client = self.create_client(SetParameters, f'{NODE_NAME}/set_parameters') 
+        #client.wait_for_service(timeout_sec=3.0)
+        
+        # Create client approach not giving expected results. Switching back to manual wait
+        time.sleep(3)
+        
         # Get list of nodes in the system
         node_names = self.get_node_names_and_namespaces()        
         
@@ -40,7 +63,7 @@ class InfoNode(Node):
             
             # Create fully qualified name if namespace is given
             full_name = namespace + "/" + name if namespace != "/" else name
-
+            #print(full_name)
             # Get list of topics created by this node
             publishers.update(
                 self.get_list(
